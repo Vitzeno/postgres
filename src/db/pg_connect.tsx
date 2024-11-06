@@ -1,14 +1,7 @@
 import { Client } from "pg";
+import { DBCreds } from "./cred";
 
-interface DBCredProps {
-  database: string;
-  username: string;
-  password: string;
-  host: string;
-  port: string;
-}
-
-export async function testConnection(props: DBCredProps): Promise<boolean> {
+export async function testConnection(props: DBCreds): Promise<boolean> {
   const client = new Client({
     user: props.username,
     host: props.host,
