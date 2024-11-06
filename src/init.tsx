@@ -51,7 +51,6 @@ export default function Command(props: LaunchProps<{ draftValues: DBCreds }>) {
       actions={
         <ActionPanel>
           <Action.SubmitForm title="Submit" onSubmit={handleSubmit} />
-          {/* <Action.SubmitForm title="Test Connection" onSubmit={handleSubmit} /> */}
         </ActionPanel>
       }
       {...itemProps}

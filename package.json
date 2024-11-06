@@ -9,7 +9,7 @@
   "commands": [
     {
       "name": "init",
-      "title": "Init Connection",
+      "title": "Create Connection",
       "description": "",
       "mode": "view"
     },
