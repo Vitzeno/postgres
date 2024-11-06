@@ -1,8 +1,30 @@
 # PostgreSQL
 
-Explore PostgreSQL databases
+Raycast extension for exploring PostgreSQL databases
 
-# Database
+# Screenshots
+
+##### Create Connection
+
+![create connection](./screenshots/create_conn.png)
+
+##### Create Connection Validation
+
+![create connection validation](./screenshots/create_conn_validation.png)
+
+##### View Connections
+
+![view connections](./screenshots/view_conns.png)
+
+##### Query Success
+
+![query success](./screenshots/conn_success.png)
+
+##### Query Fail
+
+![query fail](./screenshots/conn_fail.png)
+
+# Testing with local database
 
 ```
 docker run --name test-postgres -e POSTGRES_USER=test_user -e POSTGRES_PASSWORD=test_password -e POSTGRES_DB=test_db -p 5432:5432 -d postgres
@@ -30,6 +52,14 @@ CREATE TABLE users (
     age INT
 );
 INSERT INTO users (name, age) VALUES ('Alice', 25), ('Bob', 30);
+
+CREATE TABLE books (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    price INT
+);
+
+INSERT INTO books (name, price) VALUES ('The Way of Kings', 25), ('Of Mice and Men', 30);
 ```
 
 ```
