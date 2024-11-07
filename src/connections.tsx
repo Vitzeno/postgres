@@ -27,7 +27,7 @@ export default function Command() {
           actions={
             <ActionPanel>
               <Action
-                title="Query"
+                title="Preview"
                 onAction={() => {
                   push(<TablesView creds={credsMap.cred} />);
                 }}

@@ -53,3 +53,33 @@ export async function listEntries(props: DBCreds, table: string, limit = 10): Pr
     await client.end();
   }
 }
+
+export async function queryTable(props: DBCreds, query: string): Promise<string[]> {
+  const client = new Client({
+    user: props.username,
+    host: props.host,
+    database: props.database,
+    password: props.password,
+    port: parseInt(props.port),
+  });
+
+  try {
+    await client.connect();
+
+    const entriesResult = await client.query(query);
+    const entries = entriesResult.rows;
+
+    if (entries.length === 0) {
+      console.log(`No entries returned for query: ${query}`);
+    } else {
+      return entries;
+    }
+
+    return [];
+  } catch (error) {
+    console.error("Error connecting to database", error);
+    throw error;
+  } finally {
+    await client.end();
+  }
+}

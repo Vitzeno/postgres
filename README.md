@@ -27,7 +27,7 @@ Raycast extension for exploring PostgreSQL databases
 # Testing with local database
 
 ```
-docker run --name test-postgres -e POSTGRES_USER=test_user -e POSTGRES_PASSWORD=test_password -e POSTGRES_DB=test_db -p 5432:5432 -d postgres
+docker run --name test-postgres -e POSTGRES_USER=test -e POSTGRES_PASSWORD=test -e POSTGRES_DB=test -p 5432:5432 -d postgres
 ```
 
 This command will:
@@ -40,7 +40,7 @@ This command will:
 ### Access the Container
 
 ```
-docker exec -it test-postgres psql -U test_user -d test_db
+docker exec -it test-postgres psql -U test -d test
 ```
 
 ### Create a Sample Table

@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import { List, showToast, Toast } from "@raycast/api";
+import { Action, ActionPanel, List, showToast, Toast, useNavigation } from "@raycast/api";
 import { DBCreds } from "./db/cred";
 import { listEntries, listTables } from "./db/query";
 import { jsonToMarkdownTable } from "./utils/json";
+import TableQueryView from "./table_query";
 
-interface TableViewProps {
+interface TablesViewProps {
   creds: DBCreds;
 }
 
-export default function TablesView({ creds }: TableViewProps) {
+export default function TablesView({ creds }: TablesViewProps) {
+  const { push } = useNavigation();
   const [tables, setTables] = useState<string[]>([]);
 
   useEffect(() => {
@@ -34,18 +36,32 @@ export default function TablesView({ creds }: TableViewProps) {
   return (
     <List isShowingDetail>
       {tables.map((table) => (
-        <List.Item title={table} key={table} detail={<EntryView creds={creds} table={table} />} />
+        <List.Item
+          title={table}
+          key={table}
+          detail={<TablePreview creds={creds} table={table} />}
+          actions={
+            <ActionPanel>
+              <Action
+                title="Custom Query"
+                onAction={() => {
+                  push(<TableQueryView creds={creds} />);
+                }}
+              />
+            </ActionPanel>
+          }
+        />
       ))}
     </List>
   );
 }
 
-interface EntryViewProps {
+interface TablePreviewProps {
   creds: DBCreds;
   table: string;
 }
 
-function EntryView({ creds, table }: EntryViewProps) {
+function TablePreview({ creds, table }: TablePreviewProps) {
   const [entries, setEntries] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
 
